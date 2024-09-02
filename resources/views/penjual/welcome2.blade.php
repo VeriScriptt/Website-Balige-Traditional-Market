@@ -63,15 +63,27 @@
                     <!-- Content Row -->
                     <div class="row">
                         <div class="container-fluid">
+                            <form method="GET" action="">
+                                <label for="month">Pilih Bulan:</label>
+                                <select id="month" name="month" onchange="this.form.submit()">
+                                    @foreach (range(1, 12) as $month)
+                                    <option value="{{ $month }}" {{ $selectedMonth == $month ? 'selected' : '' }}>
+                                        {{ DateTime::createFromFormat('!m', $month)->format('F') }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </form>
                             <div class="row min-vh-150 justify-content-center align-items-center">
                                 <!-- Penjualan Bulan Ini -->
                                 <div class="col-md-4 mb-4">
                                     <div class="card custom-card bg-gradient-primary text-white shadow">
                                         <div class="card-body text-center">
-                                            <div class="text-xs font-weight-bold text-uppercase mb-1">Penjualan Bulan Ini</div>
-                                            <div class="h5 mb-3 font-weight-bold">Rp.{{ number_format($penjualanBulanIni, 0, ',', '.') }}</div>
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1">Penjualan Bulan
+                                                Ini</div>
+                                            <div class="h5 mb-3 font-weight-bold">
+                                                Rp.{{ number_format($penjualanBulanIni, 0, ',', '.') }}</div>
                                             <div class="text-gray-300">
-                                                <i class="fas fa-calendar fa-lg mr-2"></i> Bulan Ini
+                                                <i class="fas fa-calendar fa-lg mr-2"></i>
                                             </div>
                                         </div>
                                     </div>

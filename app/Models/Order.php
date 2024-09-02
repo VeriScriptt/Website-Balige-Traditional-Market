@@ -25,23 +25,6 @@ class Order extends Model
         return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 
-    // Order.php (Model)
-    // Order.php (Model)
-    // public function getBuktiTransaksiForStore($storeId)
-    // {
-    //     $buktiTransaksi = $this->bukti_transaksi ? json_decode($this->bukti_transaksi, true) : [];
-    //     return $buktiTransaksi[$storeId] ?? null;
-    // }
-
-    // public function setBuktiTransaksiForStore($storeId, $fileName)
-    // {
-    //     $buktiTransaksi = $this->bukti_transaksi ? json_decode($this->bukti_transaksi, true) : [];
-    //     $buktiTransaksi[$storeId] = $fileName;
-    //     $this->bukti_transaksi = json_encode($buktiTransaksi);
-    //     $this->save();
-    // }
-
-        // Order.php (Model)
     public function setBuktiTransaksiForStore($storeId, $filename)
     {
         $buktiTransaksi = json_decode($this->bukti_transaksi, true) ?? [];

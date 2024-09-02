@@ -101,6 +101,7 @@
                             <tr>
                                 <th class="product-thumbnail" style="color: white;">Image</th>
                                 <th class="product-name" style="color: white;">Product</th>
+                                <th class="product-name" style="color: white;">Toko</th>
                                 <th class="product-price" style="color: white;">Price</th>
                                 <th class="product-quantity" style="color: white;">Quantity</th>
                                 <th class="product-total" style="color: white;">Total</th>
@@ -120,6 +121,7 @@
                                                     <img src="{{ asset('images/produk/' . $item->gambar_produk) }}" alt="Image" class="img-fluid">
                                                 </td>
                                                 <td class="product-name">{{ $item->nama_produk }}</td>
+                                                <td class="product-store">{{ $item->produk->user->nama_toko }}</td>
                                                 <td>Rp {{ number_format($item->harga, 0, ',', '.') }}</td>
                                                 <td>
                                                     <div class="quantity">

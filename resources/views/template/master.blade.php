@@ -142,9 +142,9 @@
                                             {{ Auth::user()->name }}
                                         </a>
                                         <ul class="dropdown-menu" role="menu">
-                                            <li>
+                                            {{-- <li>
                                                 <a href="/profile">Profile</a>
-                                            </li>
+                                            </li> --}}
                                             <li>
                                                 <a href="/history">History Pembelian</a>
                                             </li>

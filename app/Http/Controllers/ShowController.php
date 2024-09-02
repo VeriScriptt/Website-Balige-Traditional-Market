@@ -32,7 +32,10 @@ class ShowController extends Controller
         $kategori = Kategori::all();
         $carousel = Caraousel::all();
         // Mengambil semua produk
-        $produk = Produk::all();
+        $produk = Produk::with('orderItems')->get();
+        $produk = $produk->sortByDesc(function ($produk) {
+            return $produk->orderItems->count();
+        });        
         // Mengambil semua users
         $users = User::where('role', 'penjual')->get();
     

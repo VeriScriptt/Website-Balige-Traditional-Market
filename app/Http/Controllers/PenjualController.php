@@ -11,17 +11,20 @@ use Illuminate\Support\Facades\Storage;
 
 class PenjualController extends Controller
 {
-    public function penjual()
+    public function penjual(Request $request)
     {
         // Ambil ID penjual yang sedang login
         $sellerId = Auth::id();
+
+        // Ambil bulan dari request, jika tidak ada default ke bulan ini
+        $selectedMonth = $request->input('month', now()->month);
 
         // Ambil data penjualan bulan ini dengan status 'Completed'
         $penjualanBulanIni = OrderItem::join('produk', 'order_items.produk_id', '=', 'produk.produk_id')
             ->join('orders', 'order_items.order_id', '=', 'orders.order_id')
             ->where('produk.id_user', $sellerId)
             ->where('orders.status', 'Completed')
-            ->whereMonth('orders.created_at', now()->month)
+            ->whereMonth('orders.created_at', $selectedMonth)
             ->selectRaw('SUM(order_items.harga * order_items.quantity) as total_penjualan')
             ->pluck('total_penjualan')
             ->first();
@@ -47,7 +50,7 @@ class PenjualController extends Controller
             ->where('produk.id_user', $sellerId)
             ->where('orders.status', 'Pending')
             ->count();
-        
+
         $totalPesanan = Order::join('order_items', 'orders.order_id', '=', 'order_items.order_id')
             ->join('produk', 'order_items.produk_id', '=', 'produk.produk_id')
             ->where('produk.id_user', $sellerId)
@@ -74,7 +77,8 @@ class PenjualController extends Controller
             'pesananBaru',
             'totalProduk',
             'totalTransaksi',
-            'totalPesanan'
+            'totalPesanan',
+            'selectedMonth' // pass the selected month to the view
         ));
     }
     public function produk()
